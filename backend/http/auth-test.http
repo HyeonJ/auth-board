@@ -1,0 +1,49 @@
+### 1. 회원가입
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "pass1234",
+  "nickname": "테스터"
+}
+
+### 2. 중복 이메일 회원가입 (에러 케이스)
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "pass1234",
+  "nickname": "테스터2"
+}
+
+### 3. 비밀번호 검증 실패 (짧은 비밀번호)
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "test2@test.com",
+  "password": "1234",
+  "nickname": "테스터"
+}
+
+### 4. 로그인 → accessToken과 Set-Cookie 확인
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "pass1234"
+}
+
+### 5. 토큰 없이 로그아웃 (401/403 기대)
+POST http://localhost:8080/api/auth/logout
+
+### 6. 로그아웃 (로그인 응답의 accessToken을 붙여넣기)
+POST http://localhost:8080/api/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NzU1NDI0MTYsImV4cCI6MTc3NTU0NDIxNn0.2MAx2pysX2EN7AKQmfU1JiNBpjBflI1JO_pISPh-9492HjmHm8NYBAd8sF9s59sKrY-BetuZaW5mOXXVamMAnw
+
+### 7. 토큰 갱신 (로그인 응답의 Set-Cookie 값을 붙여넣기)
+POST http://localhost:8080/api/auth/refresh
+Cookie: refresh_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNzc1NTQyNDgwLCJleHAiOjE3NzYxNDcyODB9.rhI77NBhcEDwqIUI1KFbuiJ08G-bsk_tDoA38L-D5p6021zo3CmLSVljxKCCY9-MXZDbgL0p0m4fo-tAs8QAVQ

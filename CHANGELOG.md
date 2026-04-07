@@ -15,7 +15,13 @@
 - CLAUDE.md 프로젝트 규칙 문서 작성 (금지 패턴, 디렉토리 구조 포함)
 - CHANGELOG.md 생성
 - Docker Compose 구성 (MySQL 8.0, init.sql 스키마 초기화)
-- Spring Boot 백엔드 프로젝트 셋업 (Gradle, Java 17, Security, MyBatis, JWT)
+- Spring Boot 백엔드 프로젝트 셋업 (Gradle, Java 21, Security, MyBatis, JWT)
 - React 프론트엔드 프로젝트 셋업 (React Router, Axios)
 - 헬스체크 API (`GET /api/health`)
 - Axios 인스턴스 설정 (baseURL, withCredentials)
+- 회원 인증 API 구현 (회원가입, 로그인, 토큰 갱신, 로그아웃)
+- JWT 토큰 발급/검증 (Access Token 30분, Refresh Token 7일)
+- Spring Security + JWT 인증 필터 구성
+- Refresh Token DB 저장 및 HttpOnly Cookie 관리
+- CORS 설정 (localhost:3000 허용)
+- 통합 예외 처리 (GlobalExceptionHandler)
