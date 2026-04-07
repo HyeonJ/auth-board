@@ -25,3 +25,5 @@
 - Refresh Token DB 저장 및 HttpOnly Cookie 관리
 - CORS 설정 (localhost:3000 허용)
 - 통합 예외 처리 (GlobalExceptionHandler)
+- 게시판 CRUD API (목록/상세 조회, 작성, 수정, 삭제)
+- 게시글 권한 검증 (본인 수정/삭제, ADMIN 전체 삭제)

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.authboard.mapper.PostMapper">
+
+    <select id="findAll" resultType="Post">
+        SELECT p.id, p.title, p.member_id, p.created_at, p.updated_at,
+               m.nickname
+        FROM post p
+        JOIN member m ON p.member_id = m.id
+        ORDER BY p.created_at DESC
+    </select>
+
+    <select id="findById" resultType="Post">
+        SELECT p.id, p.title, p.content, p.member_id, p.created_at, p.updated_at,
+               m.nickname
+        FROM post p
+        JOIN member m ON p.member_id = m.id
+        WHERE p.id = #{id}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO post (title, content, member_id)
+        VALUES (#{title}, #{content}, #{memberId})
+    </insert>
+
+    <update id="update">
+        UPDATE post
+        SET title = #{title}, content = #{content}, updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM post WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByMemberId">
+        DELETE FROM post WHERE member_id = #{memberId}
+    </delete>
+
+</mapper>
