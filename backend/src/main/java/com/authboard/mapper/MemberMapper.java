@@ -1,5 +1,6 @@
 package com.authboard.mapper;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,5 +14,9 @@ public interface MemberMapper {
 
     Optional<Member> findById(Long id);
 
+    List<Member> findAll();
+
     void insert(Member member);
+
+    void deleteById(Long id);
 }

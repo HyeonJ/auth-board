@@ -1,0 +1,37 @@
+### === ADMIN 계정 준비 ===
+
+### 0-1. ADMIN용 회원가입
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "admin@test.com",
+  "password": "admin1234",
+  "nickname": "관리자"
+}
+
+### 0-2. DB에서 role을 ADMIN으로 변경 (MySQL 콘솔에서 실행)
+# docker exec auth-board-mysql mysql -uauth_user -puser1234 auth_board -e "UPDATE member SET role='ADMIN' WHERE email='admin@test.com';"
+
+### 0-3. ADMIN 로그인 → accessToken 복사
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@test.com",
+  "password": "admin1234"
+}
+
+### === 관리자 API 테스트 ===
+
+### 1. 회원 목록 조회 (ADMIN 토큰 필요)
+GET http://localhost:8080/api/admin/members
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3NTU0NDczNiwiZXhwIjoxNzc1NTQ2NTM2fQ.yn8JWrLLBHbMAtb6t3QbEaEdk3xErwPQbi6ku8Lq0B_sGWPbR0vFAQ4XAtAzmBy5EVwJZmjbQVn6m9-AW9JvQw
+
+### 2. USER 토큰으로 접근 시도 (403 기대)
+GET http://localhost:8080/api/admin/members
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NzU1NDQzNjMsImV4cCI6MTc3NTU0NjE2M30.jTEEHsipY7L7WIzee20u-c_S0fQCav5sf8zu0yo-KQ6f1e60JVLsZYS0HJFFZya01SeiBz3exZcRrJiV2SHvMA
+
+### 3. 회원 강제 탈퇴 (ADMIN 토큰 필요 - id 수정)
+DELETE http://localhost:8080/api/admin/members/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiZW1haWwiOiJhZG1pbkB0ZXN0LmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3NTU0NDczNiwiZXhwIjoxNzc1NTQ2NTM2fQ.yn8JWrLLBHbMAtb6t3QbEaEdk3xErwPQbi6ku8Lq0B_sGWPbR0vFAQ4XAtAzmBy5EVwJZmjbQVn6m9-AW9JvQw
