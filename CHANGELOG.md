@@ -14,3 +14,8 @@
 - TODO.md 작업 상태 추적 문서 작성
 - CLAUDE.md 프로젝트 규칙 문서 작성 (금지 패턴, 디렉토리 구조 포함)
 - CHANGELOG.md 생성
+- Docker Compose 구성 (MySQL 8.0, init.sql 스키마 초기화)
+- Spring Boot 백엔드 프로젝트 셋업 (Gradle, Java 17, Security, MyBatis, JWT)
+- React 프론트엔드 프로젝트 셋업 (React Router, Axios)
+- 헬스체크 API (`GET /api/health`)
+- Axios 인스턴스 설정 (baseURL, withCredentials)
