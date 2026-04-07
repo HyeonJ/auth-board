@@ -1,6 +1,5 @@
 /* ============================================
-   Auth Pages — Apple-style centered card
-   Frosted glass panel with icon header
+   Auth Pages — Centered card with ambient glow
    ============================================ */
 .auth-page {
     display: flex;
@@ -8,12 +7,44 @@
     align-items: flex-start;
     padding: var(--space-16) var(--space-6);
     min-height: calc(100vh - var(--nav-height));
+    position: relative;
+}
+
+/* Ambient gradient orb behind auth card */
+.auth-page::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-50%, 0);
+    background: radial-gradient(
+        circle,
+        rgba(0, 113, 227, 0.06) 0%,
+        rgba(88, 86, 214, 0.03) 40%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    animation: gentlePulse 6s var(--ease-smooth) infinite;
+}
+
+[data-theme="dark"] .auth-page::before {
+    background: radial-gradient(
+        circle,
+        rgba(10, 132, 255, 0.08) 0%,
+        rgba(123, 104, 238, 0.04) 40%,
+        transparent 70%
+    );
 }
 
 .auth-card {
     width: 100%;
     max-width: 400px;
     animation: scaleIn var(--duration-gentle) var(--ease-out);
+    position: relative;
+    z-index: 1;
 }
 
 .auth-header {
@@ -25,21 +56,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     margin: 0 auto var(--space-5);
-    background: var(--accent);
+    background: var(--accent-gradient);
     border-radius: var(--radius-lg);
     box-shadow:
         var(--shadow-md),
-        0 0 20px var(--accent-glow);
+        0 0 24px rgba(0, 113, 227, 0.2),
+        0 0 48px rgba(88, 86, 214, 0.08);
     transition:
         box-shadow var(--duration-base) var(--ease-smooth),
         transform var(--duration-slow) var(--ease-spring);
 }
 
+[data-theme="dark"] .auth-icon {
+    box-shadow:
+        var(--shadow-md),
+        0 0 24px rgba(10, 132, 255, 0.25),
+        0 0 48px rgba(123, 104, 238, 0.1);
+}
+
 .auth-icon:hover {
-    transform: scale(1.05);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow:
+        var(--shadow-lg),
+        0 0 32px rgba(0, 113, 227, 0.25),
+        0 0 64px rgba(88, 86, 214, 0.12);
 }
 
 .auth-icon svg {

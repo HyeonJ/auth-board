@@ -33,9 +33,28 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
+    position: relative;
     transition:
         background-color var(--duration-slow) var(--ease-smooth),
         color var(--duration-base) var(--ease-smooth);
+}
+
+/* Ambient light effect on page */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    background: var(--gradient-ambient);
+    pointer-events: none;
+    z-index: 0;
+}
+
+#root {
+    position: relative;
+    z-index: 1;
 }
 
 /* ============================================

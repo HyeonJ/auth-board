@@ -1,6 +1,6 @@
 /* ============================================
-   Shared Components — Apple HIG Style
-   Frosted glass, generous radius, soft depth
+   Shared Components — Liquid Glass Style
+   Layered depth, ambient glow, tactile buttons
    ============================================ */
 
 /* — Page Layout — */
@@ -40,11 +40,39 @@
     border-radius: var(--radius-xl);
     padding: var(--space-8);
     box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
     transition:
         background var(--duration-base) var(--ease-smooth),
         border-color var(--duration-base) var(--ease-smooth),
         box-shadow var(--duration-base) var(--ease-smooth),
         transform var(--duration-base) var(--ease-smooth);
+}
+
+/* Subtle inner highlight for depth */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+[data-theme="dark"] .card::before {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.06) 50%,
+        transparent 100%
+    );
 }
 
 /* — Form Elements — */
@@ -67,13 +95,14 @@
     font-size: var(--text-base);
     color: var(--text-primary);
     background-color: var(--bg-primary);
-    border: 1px solid var(--border-primary);
+    border: 1.5px solid var(--border-primary);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-xs);
     transition:
         border-color var(--duration-fast) var(--ease-smooth),
         box-shadow var(--duration-fast) var(--ease-smooth),
-        background-color var(--duration-base) var(--ease-smooth);
+        background-color var(--duration-base) var(--ease-smooth),
+        transform var(--duration-fast) var(--ease-smooth);
 }
 
 .form-input:hover {
@@ -82,7 +111,8 @@
 
 .form-input:focus {
     border-color: var(--border-focus);
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--shadow-glow), var(--shadow-sm);
+    transform: translateY(-0.5px);
 }
 
 .form-input::placeholder {
@@ -97,7 +127,7 @@
     font-size: var(--text-base);
     color: var(--text-primary);
     background-color: var(--bg-primary);
-    border: 1px solid var(--border-primary);
+    border: 1.5px solid var(--border-primary);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-xs);
     resize: vertical;
@@ -106,7 +136,8 @@
     transition:
         border-color var(--duration-fast) var(--ease-smooth),
         box-shadow var(--duration-fast) var(--ease-smooth),
-        background-color var(--duration-base) var(--ease-smooth);
+        background-color var(--duration-base) var(--ease-smooth),
+        transform var(--duration-fast) var(--ease-smooth);
 }
 
 .form-textarea:hover {
@@ -115,7 +146,8 @@
 
 .form-textarea:focus {
     border-color: var(--border-focus);
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--shadow-glow), var(--shadow-sm);
+    transform: translateY(-0.5px);
 }
 
 /* — Buttons — */
@@ -125,29 +157,44 @@
     justify-content: center;
     gap: var(--space-2);
     width: 100%;
-    padding: 12px 24px;
+    padding: 13px 24px;
     font-family: var(--font-ui);
     font-size: var(--text-base);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-inverse);
-    background: var(--accent);
+    background: var(--accent-gradient);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-sm), var(--shadow-accent);
+    position: relative;
+    overflow: hidden;
     transition:
-        background var(--duration-fast) var(--ease-smooth),
         transform var(--duration-fast) var(--ease-spring),
-        box-shadow var(--duration-fast) var(--ease-smooth);
+        box-shadow var(--duration-fast) var(--ease-smooth),
+        filter var(--duration-fast) var(--ease-smooth);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+    pointer-events: none;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .btn-primary:hover {
-    background: var(--accent-hover);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
+    box-shadow: var(--shadow-md), var(--shadow-accent);
+    transform: translateY(-1.5px);
+    filter: brightness(1.05);
 }
 
 .btn-primary:active {
     transform: scale(0.98) translateY(0);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-xs);
+    filter: brightness(0.95);
 }
 
 .btn-primary:disabled {
@@ -155,6 +202,7 @@
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    filter: none;
 }
 
 .btn-secondary {
@@ -175,17 +223,20 @@
     transition:
         background var(--duration-fast) var(--ease-smooth),
         border-color var(--duration-fast) var(--ease-smooth),
-        transform var(--duration-fast) var(--ease-spring);
+        transform var(--duration-fast) var(--ease-spring),
+        box-shadow var(--duration-fast) var(--ease-smooth);
 }
 
 .btn-secondary:hover {
     background: var(--bg-hover);
     border-color: var(--text-tertiary);
-    transform: translateY(-0.5px);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
+    box-shadow: none;
 }
 
 .btn-danger {
@@ -203,17 +254,20 @@
     transition:
         background var(--duration-fast) var(--ease-smooth),
         color var(--duration-fast) var(--ease-smooth),
-        transform var(--duration-fast) var(--ease-spring);
+        transform var(--duration-fast) var(--ease-spring),
+        box-shadow var(--duration-fast) var(--ease-smooth);
 }
 
 .btn-danger:hover {
     background: var(--danger);
     color: #ffffff;
-    transform: translateY(-0.5px);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(255, 59, 48, 0.25);
 }
 
 .btn-danger:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
+    box-shadow: none;
 }
 
 .btn-row {
@@ -312,17 +366,25 @@
     font-weight: 500;
     color: var(--accent);
     margin-bottom: var(--space-5);
-    transition: opacity var(--duration-fast) var(--ease-smooth);
+    transition:
+        opacity var(--duration-fast) var(--ease-smooth),
+        transform var(--duration-fast) var(--ease-smooth);
 }
 
 .back-link:hover {
     color: var(--accent);
     opacity: 0.7;
+    transform: translateX(-2px);
 }
 
 .back-link svg {
     width: 16px;
     height: 16px;
+    transition: transform var(--duration-fast) var(--ease-smooth);
+}
+
+.back-link:hover svg {
+    transform: translateX(-2px);
 }
 
 /* — Spinner — */

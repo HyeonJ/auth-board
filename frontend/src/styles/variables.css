@@ -1,8 +1,8 @@
 /* ============================================
-   Auth Board — Apple HIG-inspired Design System
+   Auth Board — Liquid Glass Design System
    Fonts: Outfit (display) + Source Serif 4 (body)
-   Concept: Refined luminosity, frosted glass,
-            generous curves, deliberate whitespace
+   Concept: Layered depth, luminous surfaces,
+            ambient color, deliberate motion
    ============================================ */
 
 :root {
@@ -47,6 +47,7 @@
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     --duration-fast: 150ms;
     --duration-base: 250ms;
     --duration-slow: 450ms;
@@ -58,8 +59,8 @@
 }
 
 /* ============================================
-   Light Theme — "morning mist"
-   Soft whites, frosted layers, warm accent
+   Light Theme — "morning clarity"
+   Warm whites, frosted layers, refined blues
    ============================================ */
 :root,
 [data-theme="light"] {
@@ -71,7 +72,7 @@
     --bg-active: rgba(0, 0, 0, 0.06);
 
     --surface-glass: rgba(255, 255, 255, 0.72);
-    --surface-card: rgba(255, 255, 255, 0.85);
+    --surface-card: rgba(255, 255, 255, 0.88);
     --surface-elevated: #ffffff;
 
     --border-primary: rgba(0, 0, 0, 0.08);
@@ -88,6 +89,7 @@
     --accent-subtle: rgba(0, 113, 227, 0.07);
     --accent-muted: rgba(0, 113, 227, 0.14);
     --accent-glow: rgba(0, 113, 227, 0.18);
+    --accent-gradient: linear-gradient(135deg, #0071e3 0%, #5856d6 100%);
 
     --danger: #ff3b30;
     --danger-hover: #e0322a;
@@ -105,31 +107,33 @@
     --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
     --shadow-glow: 0 0 0 3px var(--accent-glow);
     --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-accent: 0 4px 20px rgba(0, 113, 227, 0.2);
 
     --nav-bg: rgba(245, 245, 247, 0.72);
     --nav-border: rgba(0, 0, 0, 0.08);
 
-    --gradient-page: linear-gradient(180deg, #f5f5f7 0%, #eeeeef 100%);
+    --gradient-page: linear-gradient(180deg, #f5f5f7 0%, #eeeef0 100%);
+    --gradient-ambient: radial-gradient(ellipse at 50% 0%, rgba(0, 113, 227, 0.04) 0%, transparent 60%);
 }
 
 /* ============================================
-   Dark Theme — "midnight glass"
-   Deep blacks, luminous glass panels
+   Dark Theme — "deep space glass"
+   Rich dark blues, luminous glass panels
    ============================================ */
 [data-theme="dark"] {
-    --bg-canvas: #000000;
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #000000;
-    --bg-tertiary: #1c1c1e;
+    --bg-canvas: #010104;
+    --bg-primary: #0d0d12;
+    --bg-secondary: #010104;
+    --bg-tertiary: #1a1a24;
     --bg-hover: rgba(255, 255, 255, 0.05);
     --bg-active: rgba(255, 255, 255, 0.08);
 
-    --surface-glass: rgba(28, 28, 30, 0.65);
-    --surface-card: rgba(28, 28, 30, 0.8);
-    --surface-elevated: #1c1c1e;
+    --surface-glass: rgba(25, 25, 38, 0.68);
+    --surface-card: rgba(28, 28, 42, 0.82);
+    --surface-elevated: #1a1a28;
 
-    --border-primary: rgba(255, 255, 255, 0.1);
-    --border-secondary: rgba(255, 255, 255, 0.05);
+    --border-primary: rgba(255, 255, 255, 0.08);
+    --border-secondary: rgba(255, 255, 255, 0.04);
     --border-focus: #0a84ff;
 
     --text-primary: #f5f5f7;
@@ -142,6 +146,7 @@
     --accent-subtle: rgba(10, 132, 255, 0.12);
     --accent-muted: rgba(10, 132, 255, 0.2);
     --accent-glow: rgba(10, 132, 255, 0.25);
+    --accent-gradient: linear-gradient(135deg, #0a84ff 0%, #7b68ee 100%);
 
     --danger: #ff453a;
     --danger-hover: #ff6961;
@@ -159,11 +164,13 @@
     --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.6);
     --shadow-glow: 0 0 0 3px var(--accent-glow);
     --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1);
+    --shadow-accent: 0 4px 20px rgba(10, 132, 255, 0.15);
 
-    --nav-bg: rgba(0, 0, 0, 0.72);
-    --nav-border: rgba(255, 255, 255, 0.08);
+    --nav-bg: rgba(6, 6, 12, 0.78);
+    --nav-border: rgba(255, 255, 255, 0.06);
 
-    --gradient-page: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+    --gradient-page: linear-gradient(180deg, #010104 0%, #0a0a14 100%);
+    --gradient-ambient: radial-gradient(ellipse at 50% 0%, rgba(10, 132, 255, 0.06) 0%, transparent 60%);
 }
 
 /* ============================================
@@ -177,7 +184,7 @@
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(16px);
     }
     to {
         opacity: 1;
@@ -215,4 +222,14 @@
 @keyframes gentlePulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.6; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes ambientRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
 }

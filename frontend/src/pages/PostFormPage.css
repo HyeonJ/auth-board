@@ -1,5 +1,5 @@
 /* ============================================
-   Post Form — Create / Edit
+   Post Form — Create / Edit with refinement
    ============================================ */
 .post-form {
     animation: scaleIn var(--duration-gentle) var(--ease-out);

@@ -1,5 +1,5 @@
 /* ============================================
-   Post Detail — Apple-style article card
+   Post Detail — Rich article with depth
    ============================================ */
 .post-detail {
     animation: scaleIn var(--duration-gentle) var(--ease-out);
@@ -9,6 +9,7 @@
     margin-bottom: var(--space-8);
     padding-bottom: var(--space-6);
     border-bottom: 0.5px solid var(--border-secondary);
+    position: relative;
 }
 
 .post-detail-title {
@@ -16,8 +17,27 @@
     font-size: var(--text-2xl);
     font-weight: 700;
     letter-spacing: -0.035em;
-    color: var(--text-primary);
     line-height: 1.3;
+    background: linear-gradient(
+        135deg,
+        var(--text-primary) 0%,
+        var(--text-primary) 60%,
+        var(--accent) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] .post-detail-title {
+    background: linear-gradient(
+        135deg,
+        var(--text-primary) 0%,
+        var(--text-primary) 50%,
+        var(--accent) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 .post-detail-meta {
@@ -25,7 +45,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: var(--space-2);
-    margin-top: var(--space-3);
+    margin-top: var(--space-4);
     font-family: var(--font-ui);
     font-size: var(--text-sm);
     color: var(--text-tertiary);
@@ -33,7 +53,8 @@
 
 .post-detail-author {
     color: var(--text-secondary);
-    font-weight: 500;
+    font-weight: 600;
+    position: relative;
 }
 
 .post-detail-badge {
@@ -45,10 +66,11 @@
     color: var(--accent);
     background: var(--accent-subtle);
     border-radius: var(--radius-full);
+    border: 1px solid var(--accent-muted);
 }
 
 .post-detail-content {
-    font-family: var(--font-ui);
+    font-family: var(--font-body);
     font-size: var(--text-md);
     line-height: 1.9;
     color: var(--text-primary);

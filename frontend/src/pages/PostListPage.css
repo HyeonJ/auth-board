@@ -1,5 +1,5 @@
 /* ============================================
-   Post List — Apple-style rounded card list
+   Post List — Refined card list with depth
    ============================================ */
 .post-list-header {
     display: flex;
@@ -21,9 +21,38 @@
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
+    position: relative;
     transition:
         background var(--duration-base) var(--ease-smooth),
-        border-color var(--duration-base) var(--ease-smooth);
+        border-color var(--duration-base) var(--ease-smooth),
+        box-shadow var(--duration-base) var(--ease-smooth);
+}
+
+/* Subtle top highlight */
+.post-list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+[data-theme="dark"] .post-list::before {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.06) 50%,
+        transparent 100%
+    );
 }
 
 /* — Individual item — */
@@ -34,8 +63,27 @@
     padding: var(--space-4) var(--space-6);
     border-bottom: 0.5px solid var(--border-secondary);
     color: var(--text-primary);
+    position: relative;
     transition:
-        background var(--duration-fast) var(--ease-smooth);
+        background var(--duration-fast) var(--ease-smooth),
+        padding-left var(--duration-base) var(--ease-out);
+}
+
+/* Left accent indicator */
+.post-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 25%;
+    bottom: 25%;
+    width: 3px;
+    background: var(--accent-gradient);
+    border-radius: 0 3px 3px 0;
+    opacity: 0;
+    transform: scaleY(0.5);
+    transition:
+        opacity var(--duration-base) var(--ease-out),
+        transform var(--duration-base) var(--ease-spring);
 }
 
 .post-item:last-child {
@@ -45,6 +93,12 @@
 .post-item:hover {
     background: var(--bg-hover);
     color: var(--text-primary);
+    padding-left: calc(var(--space-6) + 6px);
+}
+
+.post-item:hover::after {
+    opacity: 1;
+    transform: scaleY(1);
 }
 
 .post-item:active {
@@ -62,6 +116,11 @@
     white-space: nowrap;
     margin-right: var(--space-6);
     letter-spacing: -0.01em;
+    transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.post-item:hover .post-item-title {
+    color: var(--accent);
 }
 
 /* — Meta info — */
@@ -81,11 +140,11 @@
 }
 
 .post-item:nth-child(1) { animation-delay: 0ms; }
-.post-item:nth-child(2) { animation-delay: 40ms; }
-.post-item:nth-child(3) { animation-delay: 80ms; }
-.post-item:nth-child(4) { animation-delay: 120ms; }
-.post-item:nth-child(5) { animation-delay: 160ms; }
-.post-item:nth-child(6) { animation-delay: 200ms; }
-.post-item:nth-child(7) { animation-delay: 240ms; }
-.post-item:nth-child(8) { animation-delay: 280ms; }
-.post-item:nth-child(n+9) { animation-delay: 320ms; }
+.post-item:nth-child(2) { animation-delay: 50ms; }
+.post-item:nth-child(3) { animation-delay: 100ms; }
+.post-item:nth-child(4) { animation-delay: 150ms; }
+.post-item:nth-child(5) { animation-delay: 200ms; }
+.post-item:nth-child(6) { animation-delay: 250ms; }
+.post-item:nth-child(7) { animation-delay: 300ms; }
+.post-item:nth-child(8) { animation-delay: 350ms; }
+.post-item:nth-child(n+9) { animation-delay: 400ms; }

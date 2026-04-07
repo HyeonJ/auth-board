@@ -18,3 +18,5 @@ build/
 .gradle/
 out/
 node_modules/
+screenshots/
+docker/.env

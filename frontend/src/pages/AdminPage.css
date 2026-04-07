@@ -1,5 +1,5 @@
 /* ============================================
-   Admin Page — Apple-style member table
+   Admin Page — Refined member table
    ============================================ */
 .member-table {
     overflow-x: auto;
@@ -21,7 +21,7 @@
     color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    border-bottom: 0.5px solid var(--border-primary);
+    border-bottom: 1px solid var(--border-primary);
     background: var(--bg-hover);
 }
 
@@ -38,11 +38,17 @@
     font-family: var(--font-ui);
     font-size: var(--text-sm);
     border-bottom: 0.5px solid var(--border-secondary);
-    transition: background var(--duration-fast) var(--ease-smooth);
+    transition:
+        background var(--duration-fast) var(--ease-smooth),
+        padding-left var(--duration-fast) var(--ease-smooth);
 }
 
 .member-table tr:last-child td {
     border-bottom: none;
+}
+
+.member-table tbody tr {
+    transition: background var(--duration-fast) var(--ease-smooth);
 }
 
 .member-table tbody tr:hover td {
@@ -53,7 +59,7 @@
     color: var(--text-secondary);
 }
 
-/* — Role badges (pill shape) — */
+/* — Role badges (pill shape with gradient for admin) — */
 .role-badge {
     display: inline-flex;
     align-items: center;
@@ -65,13 +71,19 @@
 }
 
 .role-admin {
-    color: var(--accent);
-    background: var(--accent-subtle);
+    color: #ffffff;
+    background: var(--accent-gradient);
+    box-shadow: 0 1px 4px rgba(0, 113, 227, 0.2);
+}
+
+[data-theme="dark"] .role-admin {
+    box-shadow: 0 1px 4px rgba(10, 132, 255, 0.3);
 }
 
 .role-user {
     color: var(--text-secondary);
     background: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
 }
 
 /* — Small danger button — */
@@ -88,14 +100,18 @@
     transition:
         background var(--duration-fast) var(--ease-smooth),
         color var(--duration-fast) var(--ease-smooth),
-        transform var(--duration-fast) var(--ease-spring);
+        transform var(--duration-fast) var(--ease-spring),
+        box-shadow var(--duration-fast) var(--ease-smooth);
 }
 
 .btn-danger-sm:hover {
     background: var(--danger);
     color: #ffffff;
+    box-shadow: 0 2px 8px rgba(255, 59, 48, 0.25);
+    transform: translateY(-0.5px);
 }
 
 .btn-danger-sm:active {
     transform: scale(0.95);
+    box-shadow: none;
 }
