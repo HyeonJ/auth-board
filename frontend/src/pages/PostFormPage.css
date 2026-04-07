@@ -1,0 +1,25 @@
+/* ============================================
+   Post Form — Create / Edit
+   ============================================ */
+.post-form {
+    animation: scaleIn var(--duration-gentle) var(--ease-out);
+}
+
+.post-form .page-title {
+    margin-bottom: var(--space-6);
+}
+
+.post-form-body {
+    margin-top: var(--space-2);
+}
+
+.post-form-actions {
+    margin-top: var(--space-8);
+}
+
+.post-form-actions .btn-primary,
+.post-form-actions .btn-secondary {
+    width: auto;
+    padding: 12px 28px;
+    border-radius: var(--radius-md);
+}
